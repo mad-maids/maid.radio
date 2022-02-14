@@ -1,4 +1,4 @@
 import "@delta/start";
-import "@delta/help";
+import "@delta/helps";
 import "@delta/voice";
 import "@delta/admin";

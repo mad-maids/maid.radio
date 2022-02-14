@@ -3,3 +3,8 @@ export interface Voice {
   file?: string;
   chat?: number;
 }
+
+export interface Count {
+  type: string;
+  count: number;
+}

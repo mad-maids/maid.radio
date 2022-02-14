@@ -1,5 +1,5 @@
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
-import { Voice } from "@type/dungeon";
+import { Voice, Count } from "@type/dungeon";
 
 export default class Dungeon {
   /**
@@ -91,5 +91,39 @@ export default class Dungeon {
     if (error) throw new Error(`${error.message} (hint: ${error.hint})`);
 
     return Voices[0];
+  }
+
+  /**
+   * Get all voice messages from the Dungeon.
+   * @returns Promise<Voice[]>
+   */
+  async count(action: "up" | "down"): Promise<number> {
+    const { data: Counts, error } = await this.client
+      .from("Counter")
+      .select("*")
+      .eq("type", "voices");
+
+    if (error) throw new Error(`${error.message} (hint: ${error.hint})`);
+
+    switch (action) {
+      case "up":
+        await this.client
+          .from("Counter")
+          .update({ count: Counts[0].count + 1 })
+          .match({ type: "voices" });
+        if (error) throw new Error(`${error.message} (hint: ${error.hint})`);
+        break;
+      case "down":
+        await this.client
+          .from("Counter")
+          .update({ count: Counts[0].count - 1 })
+          .match({ type: "voices" });
+        if (error) throw new Error(`${error.message} (hint: ${error.hint})`);
+        break;
+      default:
+        throw new Error("Action not specified!");
+    }
+
+    return Counts[0].count;
   }
 }
