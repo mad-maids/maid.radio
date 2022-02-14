@@ -94,8 +94,9 @@ export default class Dungeon {
   }
 
   /**
-   * Get all voice messages from the Dungeon.
-   * @returns Promise<Voice[]>
+   * Get the counts of messages sent to the channel
+   * @param action increment or decrement whether the counter.
+   * @returns Promise<number>
    */
   async count(action: "up" | "down"): Promise<number> {
     const { data: Counts, error } = await this.client
