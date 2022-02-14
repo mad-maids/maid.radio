@@ -102,3 +102,12 @@ dist
 
 # TernJS port file
 .tern-port
+
+# IDEA files
+.idea
+.DS_Store
+**/*/.DS_Store
+*/DS_Store
+
+# PM2 sessions
+ecosystem.config.js

@@ -1,0 +1,60 @@
+{
+  "name": "maid.radio",
+  "version": "1.0.2",
+  "description": "WIUT Voicy Radio bot",
+  "main": "dist/app.js",
+  "scripts": {
+    "start": "node ./dist/app.js",
+    "build": "tsc",
+    "watch": "tsc -w",
+    "development": "nodemon ./dist/app.js",
+    "lint": "eslint ./src --ext .ts",
+    "format": "yarn format:check --write",
+    "format:check": "prettier --check \"src/**/*.ts\""
+  },
+  "keywords": [
+    "nyaasi",
+    "telegram",
+    "bot"
+  ],
+  "engines": {
+    "node": ">=16.x"
+  },
+  "repository": "https://github.com/mad-maids/maid.radio",
+  "author": "Mad Maids (https://maid.uz)",
+  "license": "CC0-1.0",
+  "dependencies": {
+    "@supabase/supabase-js": "^1.29.1",
+    "axios": "^0.21.0",
+    "chalk": "^4.1.2",
+    "dotenv": "^8.2.0",
+    "telegraf": "^3.38.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.3",
+    "@babel/preset-typescript": "^7.12.1",
+    "@telegraf/core": "^1.1.0",
+    "@types/eslint": "^7.2.4",
+    "@types/node": "^14.14.6",
+    "@types/node-schedule": "^1.3.1",
+    "@typescript-eslint/eslint-plugin": "^4.6.0",
+    "@typescript-eslint/parser": "^4.6.0",
+    "babel-plugin-add-import-extension": "^1.4.3",
+    "eslint": "^7.12.1",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-config-standard": "^16.0.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.2",
+    "module-alias": "^2.2.2",
+    "nodemon": "^2.0.6",
+    "prettier": "^2.2.0",
+    "typescript": "^4.0.5"
+  },
+  "_moduleAliases": {
+    "@delta": "dist/delta",
+    "@src": "dist"
+  }
+}
