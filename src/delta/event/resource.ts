@@ -12,9 +12,32 @@ export const promptKeyboard = (type: "audio" | "voice", content) =>
     ],
   ]);
 
-export const promptError = async (ctx: TelegrafContext) =>
-  await ctx.replyWithHTML(`Bot wasn't able to process`, {
-    reply_markup: Markup.inlineKeyboard([
-      Markup.urlButton(`Go to support team`, `https://t.me/madmaids`),
-    ]),
-  });
+export const error = async (ctx: TelegrafContext) =>
+  await ctx.replyWithHTML(
+    `Seems like bot is malfunctioning. Please, come back little bit later...`,
+    {
+      reply_markup: Markup.inlineKeyboard([
+        Markup.urlButton(`Go to support team`, `https://t.me/madmaids`),
+      ]),
+    }
+  );
+
+export const actionMessage = (type: string, ctx: TelegrafContext) =>
+  `${
+    type[0].toLocaleUpperCase() + type.slice(1)
+  } received by <a href="tg://user?id=${ctx.from.id}">${
+    ctx.from.first_name
+  }</a>`;
+
+export const actionKeyboard = (message) =>
+  Markup.inlineKeyboard([
+    [
+      Markup.callbackButton(`No`, `admin_no_${message.id}`),
+      Markup.callbackButton(`Yes`, `admin_yes_${message.id}`),
+    ],
+  ]);
+
+export const actionEnd = async (ctx: TelegrafContext) =>
+  await ctx.replyWithHTML(
+    `Voice has been sent! Thanks for using our service...`
+  );
