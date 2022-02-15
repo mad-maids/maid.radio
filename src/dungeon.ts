@@ -49,12 +49,17 @@ export default class Dungeon {
    * Creates a new event.
    * @param file File ID of the event
    * @param chat The Chat ID of sender
+   * @param type Type of content
    * @returns Promise<Voice[]>
    */
-  async set(file: string, chat: number): Promise<Voice[]> {
+  async set(
+    file: string,
+    chat: number,
+    type: "voice" | "audio"
+  ): Promise<Voice[]> {
     const { data: Voices, error } = await this.client
       .from("Voices")
-      .insert([{ file, chat }]);
+      .insert([{ file, chat, type }]);
 
     if (error) throw new Error(`${error.message} (hint: ${error.hint})`);
 
