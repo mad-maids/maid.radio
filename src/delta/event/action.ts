@@ -2,7 +2,6 @@ import { composer, middleware, dungeon } from "@src/core";
 import { TelegrafContext } from "@type/telegraf";
 import * as consoles from "@src/utils";
 import * as resource from "./resource";
-import { actionEnd, error } from "./resource";
 
 composer.action(
   /(voice|audio)_(yes|no)_(.*)/gi,
@@ -29,12 +28,12 @@ composer.action(
             });
             break;
           default:
-            return await error(ctx);
+            return await resource.error(ctx);
         }
         await ctx.deleteMessage();
-        return actionEnd(ctx);
+        return resource.actionEnd(ctx);
       } catch (_) {
-        return await error(ctx);
+        return await resource.error(ctx);
       }
     }
 
@@ -46,7 +45,7 @@ composer.action(
           `<b>Alright, give it another shot and try your best!</b>`
         );
       } catch (_) {
-        return await error(ctx);
+        return await resource.error(ctx);
       }
     }
   }

@@ -2,7 +2,7 @@ export interface Voice {
   id?: number;
   file?: string;
   chat?: number;
-  type?: string;
+  type?: "audio" | "voice";
 }
 
 export interface Count {

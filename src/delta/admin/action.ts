@@ -1,46 +1,42 @@
 import { composer, dungeon, middleware } from "@src/core";
 import * as consoles from "@src/utils";
-import { TelegrafContext } from "telegraf/typings/context";
-import { Markup } from "telegraf";
+import * as resource from "./resource";
+import { TelegrafContext } from "@type/telegraf";
 
-composer.action(/admin_yes_(.*)/gi, async (ctx: TelegrafContext) => {
-  const message = await dungeon.get(parseInt(ctx.match[1]));
-  const counter = await dungeon.count("up");
+composer.action(/admin_(yes|no)_(.*)/gi, async (ctx: TelegrafContext) => {
+  const prompt = ctx.match[1],
+    message = await dungeon.get(parseInt(ctx.match[2]));
   try {
-    await ctx.deleteMessage();
-    await ctx.telegram.sendVoice(process.env.STREAM, message.file, {
-      parse_mode: "HTML",
-      caption: `#${counter} voice received\nRate it with emotions!`,
-      reply_markup: Markup.inlineKeyboard([
-        [
-          Markup.urlButton(
-            `Send your own voice`,
-            `https://t.me/${ctx.botInfo.username}`
-          ),
-        ],
-      ]),
-    });
+    if (prompt === "yes") {
+      await ctx.deleteMessage();
+      switch (message.type) {
+        case "voice":
+          await ctx.telegram.sendVoice(process.env.STREAM, message.file, {
+            parse_mode: "HTML",
+            caption: await resource.actionMessage(message.type),
+            reply_markup: resource.actionKeyboard(message.type, ctx),
+          });
+          break;
+        case "audio":
+          await ctx.telegram.sendAudio(process.env.STREAM, message.file, {
+            parse_mode: "HTML",
+            caption: await resource.actionMessage(message.type),
+            reply_markup: resource.actionKeyboard(message.type, ctx),
+          });
+          break;
+      }
+      await dungeon.del(parseInt(ctx.match[1]));
+    }
 
-    await dungeon.del(parseInt(ctx.match[1]));
+    if (prompt === "no") {
+      const content = await dungeon.get(parseInt(ctx.match[1]));
+      await resource.actionDeclined(ctx, content);
+      await dungeon.del(parseInt(ctx.match[1]));
+      await ctx.deleteMessage();
+    }
   } catch (_) {
-    return await ctx.replyWithHTML(
-      `Couldn't send the request. Please, try a little bit later.`
-    );
-  }
-});
-
-composer.action(/admin_no_(.*)/gi, async (ctx: TelegrafContext) => {
-  try {
-    const content = await dungeon.get(parseInt(ctx.match[1]));
-    await ctx.telegram.sendVoice(content.chat, content.file, {
-      caption: `We are so sorry. Your voice couldn't make out it's way to our channel. Seems like it has things that breaks some of our guidelines!`,
-    });
-    await dungeon.del(parseInt(ctx.match[1]));
-    await ctx.deleteMessage();
-  } catch (_) {
-    return await ctx.replyWithHTML(
-      `Seems like bot is malfunctioning. Moderators attention is required...`
-    );
+    console.error();
+    return await resource.error(ctx);
   }
 });
 

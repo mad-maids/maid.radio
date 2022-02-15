@@ -1,20 +1,28 @@
 import { composer, dungeon, middleware } from "@src/core";
 import * as consoles from "@src/utils";
-import { TelegrafContext } from "telegraf/typings/context";
-import { Markup } from "telegraf";
+import * as resource from "./resource";
+import { TelegrafContext } from "@type/telegraf";
 
 composer.command("pending", async (ctx: TelegrafContext) => {
   const content = await dungeon.pending();
   if (!content) return await ctx.replyWithHTML(`Queue is clear!`);
   if (content)
-    return await ctx.replyWithVoice(content.file, {
-      parse_mode: "HTML",
-      caption: `Would you like to send this voice to channel?`,
-      reply_markup: Markup.inlineKeyboard([
-        Markup.callbackButton(`No`, `admin_no_${content.id}`),
-        Markup.callbackButton(`Yes`, `admin_yes_${content.id}`),
-      ]),
-    });
+    switch (content.type) {
+      case "audio":
+        return await ctx.replyWithAudio(content.file, {
+          parse_mode: "HTML",
+          caption: resource.pendingMessage,
+          reply_markup: resource.pendingKeyboard(content),
+        });
+      case "voice":
+        return await ctx.replyWithVoice(content.file, {
+          parse_mode: "HTML",
+          caption: resource.pendingMessage,
+          reply_markup: resource.pendingKeyboard(content),
+        });
+      default:
+        return await resource.pendingError(ctx);
+    }
 });
 
 middleware(composer);
