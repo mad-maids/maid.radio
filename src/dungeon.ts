@@ -1,5 +1,5 @@
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
-import { Voice, Count } from "@type/dungeon";
+import { Voice, OnlyId } from "@type/dungeon";
 
 export default class Dungeon {
   /**
@@ -126,5 +126,21 @@ export default class Dungeon {
     }
 
     return Counts[0].count;
+  }
+
+  /**
+   * Get all admin telegram IDs from the Dungeon.
+   * @returns Promise<OnlyId[]>
+   */
+  async getAllAdmins(): Promise<OnlyId[]> {
+    const { data: Groups, error } = await this.client
+      .from("Admins")
+      .select("id")
+      .order("id")
+      .range(0, 100);
+
+    if (error) throw new Error(`${error.message} (hint: ${error.hint})`);
+
+    return Groups;
   }
 }

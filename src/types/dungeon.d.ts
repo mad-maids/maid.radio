@@ -8,3 +8,7 @@ export interface Count {
   type: string;
   count: number;
 }
+
+export interface OnlyId {
+  id: number;
+}

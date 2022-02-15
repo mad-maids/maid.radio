@@ -1,25 +1,13 @@
 import { Markup } from "telegraf";
 
 export const message =
-  `<b>Welcome to Mad Maid's Westmaid Chan 😏!</b>` +
+  `<b>Hello Dear Wiuterians!</b>` +
   `\n` +
   `\n` +
-  `Hi Sugar!) I'm West Maid that helps you to keep tracking upcoming lessons, guides and gives you more information about BIS ╰(*°▽°*)╯.` +
+  `With the help of this bot, you can send your audios & voice messages that you would like to share with everyone at WIUT.` +
   `\n` +
   `\n` +
-  `With my help, you can do:` +
-  `\n` +
-  `\n` +
-  `<code>* Get information about yourself & modules</code>` +
-  `\n` +
-  `<code>* Get informed about upcoming classes</code>` +
-  `\n` +
-  `<code>* Check your timetable for today</code>` +
-  `\n` +
-  `<code>* Leave a feedback to admins</code>` +
-  `\n` +
-  `\n` +
-  `Hey, I hope we can get to know each other 😄` +
+  `Send your audios or voices messages directly without hesitation. I hope you will enjoy this bot.` +
   `\n` +
   `\n` +
   `<i>In order to see full detailed usage information of the bot, press the button below.</i>`;
@@ -27,10 +15,3 @@ export const message =
 export const keyboard = Markup.inlineKeyboard([
   [Markup.callbackButton("Show more information", "help")],
 ]);
-
-export const payload = `<b>Shall we continue our exploration here?</b>`;
-
-export const inline = (search: string) =>
-  Markup.inlineKeyboard([
-    [Markup.switchToCurrentChatButton(`Restore inline window`, search)],
-  ]);

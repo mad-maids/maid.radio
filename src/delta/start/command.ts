@@ -4,7 +4,7 @@ import * as consoles from "@src/utils";
 import * as resource from "./resource";
 
 composer.start(async (ctx: TelegrafContext) => {
-  return await ctx.replyWithHTML(`Hello ${ctx.chat.id}`, {
+  return await ctx.replyWithHTML(resource.message, {
     reply_markup: resource.keyboard,
   });
 });
