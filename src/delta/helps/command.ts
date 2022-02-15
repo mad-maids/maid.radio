@@ -1,13 +1,11 @@
-import { composer, dungeon, middleware } from "@src/core";
+import { composer, middleware } from "@src/core";
 import * as consoles from "@src/utils";
 import * as resource from "./resource";
-import { TelegrafContext } from "telegraf/typings/context";
-import { OnlyId } from "@type/dungeon";
+import { TelegrafContext } from "@type/telegraf";
+import { isAdmin } from "@src/utils";
 
 composer.help(async (ctx: TelegrafContext) => {
-  const admins = (await dungeon.getAllAdmins()).map((user: OnlyId) => user.id);
-  console.log(admins.includes(ctx.from.id));
-  await ctx.replyWithHTML(resource.message(admins.includes(ctx.from.id)), {
+  await ctx.replyWithHTML(resource.message(await isAdmin(ctx)), {
     reply_markup: resource.keyboard,
   });
 });

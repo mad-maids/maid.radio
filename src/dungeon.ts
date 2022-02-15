@@ -14,7 +14,7 @@ export default class Dungeon {
   }
 
   /**
-   * Get all voice messages from the Dungeon.
+   * Get all event messages from the Dungeon.
    * @returns Promise<Voice[]>
    */
   async all(): Promise<Voice[]> {
@@ -30,8 +30,8 @@ export default class Dungeon {
   }
 
   /**
-   * Fetches a voice by ID from the Dungeon.
-   * @param id Telegram Message ID of a voice message
+   * Fetches a event by ID from the Dungeon.
+   * @param id Telegram Message ID of a event message
    * @returns Promise<Voice>
    */
   async get(id: number): Promise<Voice> {
@@ -46,8 +46,8 @@ export default class Dungeon {
   }
 
   /**
-   * Creates a new voice.
-   * @param file File ID of the voice
+   * Creates a new event.
+   * @param file File ID of the event
    * @param chat The Chat ID of sender
    * @returns Promise<Voice[]>
    */
@@ -62,8 +62,8 @@ export default class Dungeon {
   }
 
   /**
-   * Deletes voice.
-   * @param id The ID of the voice
+   * Deletes event.
+   * @param id The ID of the event
    * @returns Promise<Voice[]>
    */
   async del(id: number): Promise<Voice[]> {
@@ -78,7 +78,7 @@ export default class Dungeon {
   }
 
   /**
-   * Get all voice messages from the Dungeon.
+   * Get all event messages from the Dungeon.
    * @returns Promise<Voice[]>
    */
   async pending(): Promise<Voice> {
