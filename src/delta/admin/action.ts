@@ -6,6 +6,8 @@ import { TelegrafContext } from "@type/telegraf";
 composer.action(/admin_(yes|no)_(.*)/gi, async (ctx: TelegrafContext) => {
   const prompt = ctx.match[1],
     message = await dungeon.get(parseInt(ctx.match[2]));
+
+  console.log(prompt, message);
   try {
     if (prompt === "yes") {
       await ctx.deleteMessage();
@@ -25,17 +27,16 @@ composer.action(/admin_(yes|no)_(.*)/gi, async (ctx: TelegrafContext) => {
           });
           break;
       }
-      await dungeon.del(parseInt(ctx.match[1]));
+      await dungeon.del(message.id);
     }
 
     if (prompt === "no") {
-      const content = await dungeon.get(parseInt(ctx.match[1]));
-      await resource.actionDeclined(ctx, content);
-      await dungeon.del(parseInt(ctx.match[1]));
+      await resource.actionDeclined(ctx, message);
+      await dungeon.del(message.id);
       await ctx.deleteMessage();
     }
-  } catch (_) {
-    console.error();
+  } catch (e) {
+    console.log(e);
     return await resource.error(ctx);
   }
 });
