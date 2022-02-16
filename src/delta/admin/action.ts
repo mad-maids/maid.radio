@@ -7,7 +7,6 @@ composer.action(/admin_(yes|no)_(.*)/gi, async (ctx: TelegrafContext) => {
   const prompt = ctx.match[1],
     message = await dungeon.get(parseInt(ctx.match[2]));
 
-  console.log(prompt, message);
   try {
     if (prompt === "yes") {
       await ctx.deleteMessage();
@@ -35,8 +34,7 @@ composer.action(/admin_(yes|no)_(.*)/gi, async (ctx: TelegrafContext) => {
       await dungeon.del(message.id);
       await ctx.deleteMessage();
     }
-  } catch (e) {
-    console.log(e);
+  } catch (_) {
     return await resource.error(ctx);
   }
 });
