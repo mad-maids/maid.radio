@@ -7,6 +7,7 @@ export const actionMessage = async (type: "audio" | "voice") =>
 
 export const actionKeyboard = (type: "audio" | "voice", ctx: TelegrafContext) =>
   Markup.inlineKeyboard([
+    [Markup.urlButton(`More at Radio WIUT`, `https://t.me/wiutinfo`)],
     [
       Markup.urlButton(
         `Send your own ${type}`,
