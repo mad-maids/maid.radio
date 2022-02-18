@@ -5,6 +5,7 @@ import { TelegrafContext } from "@type/telegraf";
 
 composer.action("about", async (ctx: TelegrafContext) => {
   await ctx.editMessageText(resource.message, {
+    parse_mode: "HTML",
     reply_markup: resource.keyboard,
     disable_web_page_preview: true,
   });
