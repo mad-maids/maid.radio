@@ -4,7 +4,7 @@ export const message =
   `<b>Briefly about the bot and its functionalities...</b>` +
   `\n` +
   `\n` +
-  `<a href="https://t.me/wiutinfo">West Radio Helper</a> - a telegram bot that helps students to send their message ` +
+  `<a href="https://t.me/wiutinfo">WIUT Radio Helper</a> - a telegram bot that helps students to send their message ` +
   `to a centralized telegram channel in voice or audio form and exchange their singing or ` +
   `audio things. It works similarly like confession things, but this platform targets only audio format of messages. ` +
   `The idea of this platform was created by <a href="https://t.me/malikaxafizova">Malika Khafizova</a> ` +
