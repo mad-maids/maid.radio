@@ -18,7 +18,7 @@ export const actionKeyboard = (type: "audio" | "voice", ctx: TelegrafContext) =>
 
 export const actionDeclined = async (ctx: TelegrafContext, content) => {
   const base = (type: string) =>
-    `We are so sorry. Your ${type} couldn't make out it's way to our channel. Seems like it has things that breaks some of our guidelines!`;
+    `We are so sorry. Your ${type} couldn't make out it's way to our channel. Seems like it has things that breaks some of our guidelines! You can read our rules on /rules command.`;
   switch (content.type) {
     case "voice":
       return await ctx.telegram.sendVoice(content.chat, content.file, {

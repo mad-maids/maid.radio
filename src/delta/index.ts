@@ -3,3 +3,4 @@ import "@delta/helps";
 import "@delta/event";
 import "@delta/admin";
 import "@delta/about";
+import "@delta/rules";
