@@ -15,4 +15,5 @@ export const message =
 export const keyboard = Markup.inlineKeyboard([
   [Markup.callbackButton("Show more information", "help")],
   [Markup.callbackButton("Briefly about the bot", "about")],
+  [Markup.callbackButton("Get to know about rules", "rules")],
 ]);
