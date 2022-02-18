@@ -10,7 +10,7 @@ export const message = (isAdmin: boolean): string => {
     `/about - <code>detailed information about bot</code>` +
     `\n` +
     `\n` +
-    `<b>Send audio content or message directly to process it!</b>`;
+    `<b>Send audio content or voice message directly to process it!</b>`;
 
   const admin: string =
     `\n` +
