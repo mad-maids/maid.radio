@@ -42,4 +42,4 @@ This bot exists thankfully for those who contributed this project, and they are:
 
 <p align="center">Copyright &copy; 2020-2022 <a href="https://maid.uz" target="_blank">Mad Maids</a></p>
 
-<p align="center"><a href="https://github.com/mad-maids/maid.ts/blob/master/license"><img src="https://img.shields.io/static/v1.svg?style=flat-square&label=License&message=CC0-1.0&logoColor=eceff4&logo=github&colorA=000000&colorB=ffffff"/></a></p>
+<p align="center"><a href="https://github.com/mad-maids/maid.radio/blob/master/license"><img src="https://img.shields.io/static/v1.svg?style=flat-square&label=License&message=CC0-1.0&logoColor=eceff4&logo=github&colorA=000000&colorB=ffffff"/></a></p>
