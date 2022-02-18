@@ -39,12 +39,13 @@ composer.action(
 
     if (prompt === "no") {
       try {
-        await dungeon.del(parseInt(ctx.match[1]));
+        await dungeon.del(message.id);
         await ctx.deleteMessage();
         return await ctx.replyWithHTML(
           `<b>Alright, give it another shot and try your best!</b>`
         );
       } catch (_) {
+        console.log(_);
         return await resource.error(ctx);
       }
     }

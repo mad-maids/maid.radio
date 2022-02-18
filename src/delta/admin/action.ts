@@ -4,8 +4,23 @@ import * as resource from "./resource";
 import { TelegrafContext } from "@type/telegraf";
 
 composer.action(/admin_(yes|no)_(.*)/gi, async (ctx: TelegrafContext) => {
-  const prompt = ctx.match[1],
-    message = await dungeon.get(parseInt(ctx.match[2]));
+  const prompt = ctx.match[1];
+  const message = await dungeon.get(parseInt(ctx.match[2]));
+
+  try {
+    if (!message) {
+      await ctx.deleteMessage();
+      return await ctx
+        .replyWithHTML(`✅ It was already responded by other admin!`)
+        .then((msg) => {
+          setTimeout(function () {
+            ctx.telegram.deleteMessage(ctx.chat.id, msg.message_id);
+          }, 3000);
+        });
+    }
+  } catch (_) {
+    console.log(_);
+  }
 
   try {
     if (prompt === "yes") {

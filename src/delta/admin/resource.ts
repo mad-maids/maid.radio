@@ -15,10 +15,28 @@ export const actionKeyboard = (type: "audio" | "voice", ctx: TelegrafContext) =>
     ],
   ]);
 
-export const actionDeclined = async (ctx: TelegrafContext, content) =>
-  await ctx.telegram.sendVoice(content.chat, content.file, {
-    caption: `We are so sorry. Your voice couldn't make out it's way to our channel. Seems like it has things that breaks some of our guidelines!`,
-  });
+export const actionDeclined = async (ctx: TelegrafContext, content) => {
+  const base = (type: string) =>
+    `We are so sorry. Your ${type} couldn't make out it's way to our channel. Seems like it has things that breaks some of our guidelines!`;
+  switch (content.type) {
+    case "voice":
+      return await ctx.telegram.sendVoice(content.chat, content.file, {
+        caption: base(content.type),
+      });
+    case "audio":
+      return await ctx.telegram.sendAudio(content.chat, content.file, {
+        caption: base(content.type),
+      });
+    default:
+      return await ctx.telegram.sendMessage(
+        content.chat,
+        `Seems like, the content that you sent us had invalid type of data`,
+        {
+          parse_mode: "HTML",
+        }
+      );
+  }
+};
 
 export const pendingMessage = `Would you like to send this to the channel?\``;
 
